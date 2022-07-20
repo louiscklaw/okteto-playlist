@@ -1,0 +1,19 @@
+services:
+  helloworld:
+    build: reverse-proxy
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
+    restart: always
+
+  frontend:
+    build: frontend
+    ports:
+      - 80
+    volumes:
+      - frontend:/src
+    command: yarn start
+
+volumes:
+  data:
